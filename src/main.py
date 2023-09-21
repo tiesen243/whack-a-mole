@@ -120,18 +120,6 @@ while isRunning:
         elif e.type == USEREVENT + 1:
             Generate_Enermy()
 
-    elif e.type == pygame.KEYDOWN and e.key == pygame.K_r and isGameOver:
-        score = 0
-        heart = 4
-        hitung = 5
-        bomb = 4
-        lastUpdate = pygame.time.get_ticks()
-        delay = 4000
-        time = -500
-        current_mode = mode["NORMAL"]
-        attacker.unhit()
-        robo_list_rect.clear()
-
     now = pygame.time.get_ticks()
     if now - lastUpdate > 1000 and hitung > 0:
         hitung -= 1
@@ -170,6 +158,21 @@ while isRunning:
         draw_text("Game Over", 100, 300, 400, screen)
         draw_text(f"Score: {score}", 69, 400, 500, screen)
         draw_text('Press "R" to restart', 50, 350, 600, screen)
+        draw_text("Press Q to quit", 50, 350, 700, screen)
+
+        if e.type == pygame.KEYDOWN and e.key == pygame.K_q:
+            isRunning = False
+        elif e.type == pygame.KEYDOWN and e.key == pygame.K_r:
+            score = 0
+            heart = 4
+            hitung = 5
+            bomb = 4
+            delay = 4000
+            time = -500
+            lastUpdate = pygame.time.get_ticks()
+            current_mode = mode["NORMAL"]
+            attacker.unhit()
+            robo_list_rect.clear()
 
     else:
         pygame.mouse.set_visible(False)

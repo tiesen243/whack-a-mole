@@ -21,4 +21,5 @@
 
 # How to run
 
-run `main.exe` in `output` folder and enjoy the game.
+- Install requirements: `pip install -r requirements.txt`
+- Run `main.exe` in `output` folder or run `python main.py` (change directory to `src` folder first) and enjoy the game.
