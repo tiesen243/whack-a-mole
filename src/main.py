@@ -30,7 +30,7 @@ missSfx = pygame.mixer.Sound("../assets/sounds/miss.mp3")
 
 
 # Create a matrix of enermy position (3x3 for normal mode, 6x6 for hard mode)
-robo_list_rect = []
+matrixRect = []
 
 # Attacker group
 attacker = Attacker()
@@ -64,7 +64,7 @@ def Generate_Enermy():
     for _ in range(amount):
         enermy = Enermy()
         enermy_group.add(enermy)
-        enermy_group.update(robo_list_rect)
+        enermy_group.update(matrixRect)
 
 
 # Main loop
@@ -73,7 +73,6 @@ while isRunning:
     e = event.poll()
     isGameOver = True if heart == 0 else False
 
-    # Foreach 10s, decrease delay by 0.5s (hard) or 0.1s (normal) and increase rand by 1 (hard only)
     time += 1
     if time % 1000 == 0 and time != 0 and delay >= 500:
         delay -= 100 if current_mode == mode["NORMAL"] else 500
@@ -127,7 +126,7 @@ while isRunning:
         Generate_Enermy()
 
     screen.blit(BG, (0, 0))
-    drawMatrix(current_mode, screen, robo_list_rect)
+    drawMatrix(current_mode, screen, matrixRect)
     draw_text(f"Score: {score}", 50, 10, 10, screen)
     draw_text(f"Bomb: {bomb}", 50, 430, 10, screen) if current_mode == mode[
         "HARD"
@@ -145,10 +144,10 @@ while isRunning:
 
         if e.type == pygame.KEYDOWN and e.key == pygame.K_n:
             current_mode = mode["NORMAL"]
-            robo_list_rect.clear()
+            matrixRect.clear()
         elif e.type == pygame.KEYDOWN and e.key == pygame.K_h:
             current_mode = mode["HARD"]
-            robo_list_rect.clear()
+            matrixRect.clear()
         elif e.type == pygame.KEYDOWN and e.key == pygame.K_q:
             isRunning = False
 
@@ -172,7 +171,7 @@ while isRunning:
             lastUpdate = pygame.time.get_ticks()
             current_mode = mode["NORMAL"]
             attacker.unhit()
-            robo_list_rect.clear()
+            matrixRect.clear()
 
     else:
         pygame.mouse.set_visible(False)

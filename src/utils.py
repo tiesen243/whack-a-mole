@@ -15,10 +15,8 @@ mode = {
 
 
 # Utils function
-def drawMatrix(
-    current_mode: dict, screen: pygame.Surface, robo_list_rect: list
-) -> None:
-    robo = pygame.image.load("../assets/imgs/hole.png").convert_alpha()
+def drawMatrix(current_mode: dict, screen: pygame.Surface, matrixRect: list) -> None:
+    hole = pygame.image.load("../assets/imgs/hole.png").convert_alpha()
     x, y = 0, 0
 
     if current_mode == mode["HARD"]:
@@ -36,9 +34,9 @@ def drawMatrix(
     for _ in range(current_mode["Row"]):
         x = 0
         for _ in range(current_mode["Col"]):
-            screen.blit(robo, (x * multi + coe, y * multi + coe))
+            screen.blit(hole, (x * multi + coe, y * multi + coe))
             r = pygame.rect.Rect(x * multi + coe, y * multi + coe, 100, 100)
-            robo_list_rect.append(r)
+            matrixRect.append(r)
             x += 1
         y += 1
 
